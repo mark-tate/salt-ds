@@ -12,6 +12,7 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
+    "postbuild": "cp -r snapshots .next",
     "gen:snapshot": "yarn mosaic build --out snapshots --name latest --config mosaic.config.js",
     "serve:snapshot:file": "yarn cross-env MOSAIC_MODE='snapshot-file' concurrently --kill-others 'yarn dev'",
     "serve:snapshot:s3": "yarn cross-env MOSAIC_MODE='snapshot-s3' concurrently --kill-others 'yarn dev'",
