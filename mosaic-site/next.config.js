@@ -1,4 +1,17 @@
 const webpack = require("webpack");
+const fs = require("fs-extra");
+
+const copySnapshots = () => {
+  const sourceDir = 'snapshots';
+  const destDir = '.next/snapshots';
+  fs.copy(sourceDir, destDir, function (err) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Snapshots copied successfully!');
+      }
+   });
+};
 
 module.exports = {
   reactStrictMode: true,
@@ -74,4 +87,9 @@ module.exports = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  async afterBuild({ isDev }) {
+     if (!isDev) {
+        copySnapshots();
+     }
+  }
 };
